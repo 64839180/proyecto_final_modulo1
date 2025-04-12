@@ -1,6 +1,6 @@
 from data_load.read_images import File
 from crud.agregar import ProcessImage
-
+from crud.eliminar import DeleteImage
 file = File()
 file._data_load('covid/images')
 #file.show_data()
@@ -25,7 +25,11 @@ while True:
         elif opcion == 2:
             print("Selecionaste Opcion 2")
         elif opcion == 3:
-            print("Selecionaste Opcion 3")
+            print("Seleccionaste Opción 3")
+            d = DeleteImage(file.data)  # Pasar los datos cargados
+            d.list_images()  # Mostrar imágenes disponibles
+            image_id = input("Ingrese el ID de la imagen a eliminar: ")
+            d.delete(image_id)  # Eliminar la imagen
         elif opcion == 0:
             print("Selecionaste Opcion 0")
             break
