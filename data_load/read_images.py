@@ -3,7 +3,6 @@ class File:
     def __init__(self):
         """
         Constructor de la clase File, inicializa el diccionario images
-        
         """
         self.images = {}
     
@@ -22,7 +21,6 @@ class File:
         --------
         None: none
             No retorna ningun objeto simplemente carga los datos en un diccionario
-                        
         """
         import os
         
@@ -33,6 +31,7 @@ class File:
         except Exception as e:
             print("No existe la ruta especificada favor corriga el error:")
             print("\nERROR: ", e, "\n")
+            return
         
         curr_dir = os.getcwd()
         print("Loading files........")
@@ -40,16 +39,17 @@ class File:
         try:
             for file in os.listdir(curr_dir):
                 file_name = os.path.splitext(file)
-                lista = file_name[0].split("-")
-                id = lista[1]
-                extension = file_name[1][1:]            
+                id = file_name[0]  # Usar nombre sin extensión como ID
+                extension = file_name[1][1:] if file_name[1] else ""
                 ruta = os.path.join(curr_dir, file)            
                 tamaño = os.path.getsize(ruta)
-                self.images[id] = {"id": id, 
-                                "filename": file, 
-                                "extension": extension, 
-                                "path": ruta, 
-                                "size": tamaño}            
+                self.images[id] = {
+                    "id": id,
+                    "filename": file,
+                    "extension": extension,
+                    "path": ruta,
+                    "size": tamaño
+                }            
                 print(file, "File Loaded ")
         except Exception as e:
             print("No se pudo leer la ruta especificada:")
@@ -85,22 +85,19 @@ class File:
             print("\nERROR: ", e, "\n")
         
         return resultado
-            
-        
-                
+    
     def show_data(self):
         """
         Funcion que muestra los datos del diccionario relaciondos a imagenes
-        
         """    
         try:    
             for key, valor in self.images.items():
                 print("id:", valor['id'], 
-                    " filename:", valor['filename'], 
-                    " extension:", valor['extension'], 
-                    " path", valor['path'], 
-                    " size:", valor['size']
-                    )            
+                      " filename:", valor['filename'], 
+                      " extension:", valor['extension'], 
+                      " path:", valor['path'], 
+                      " size:", valor['size']
+                     )            
         except Exception as e:
             print("ERROR: ", e)
             
