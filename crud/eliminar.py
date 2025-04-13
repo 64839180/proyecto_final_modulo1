@@ -64,4 +64,5 @@ class DeleteImage:
             return False
         except Exception as e:
             print(f"Error al eliminar la imagen: {str(e)}")
-            return False
+            return False 
+        
